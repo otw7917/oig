@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OIG (Open Interface Guideline..)
 
-## Getting Started
+OIG는 웹 인터페이스를 위한 **디자인 가이드라인(Design Guideline)** 구축을 목표로 하는 프로젝트입니다. 이 가이드라인 안에는 **레이아웃(Layout)**, **그리드 시스템(Grid System)**, 그리고 다양한 **UI 컴포넌트**들이 포함되어 있으며, 이들을 직접 설계하고 체계화하는 과정을 통해 실무에 적용 가능한 디자인 시스템을 실험합니다.
 
-First, run the development server:
+## 🎯 프로젝트 목적
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- SwiftUI, Material Design, Tailwind CSS 등 다양한 디자인 철학에 기반한 **그리드 시스템 구현 연습**
+- `Grid`, `GridRow`, `Container`, `Card`, `LayoutWrapper` 등의 핵심 레이아웃 컴포넌트를 직접 설계 및 사용
+- 반응형 UI, 구성요소 재사용성, 스타일 일관성 등을 고려한 **프론트엔드 아키텍처 설계 능력 향상**
+- Storybook 또는 `/examples` 페이지를 통한 **실제 UI 테스트 및 문서화**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🧱 주요 구성
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `components/layout` — 그리드, 컨테이너, FlexBox 등 레이아웃 요소
+- `components/elements` — 버튼, 카드, 타이포그래피 등 UI 요소
+- `app/examples` — 그리드/레이아웃 예제 페이지
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 사용 기술
 
-## Learn More
+- **Next.js**
+- **Tailwind CSS**
+- **TypeScript (Strict Mode)**
+- **shadcn/ui**
+- **class-variance-authority (CVA)**
 
-To learn more about Next.js, take a look at the following resources:
+## 📖 공부 및 연습 계획
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 주요 디자인 가이드라인(HIG, Material, Fluent 등) 아티클을 읽고 핵심 철학과 원칙을 정리
+- 정리한 디자인 원칙을 내가 만든 컴포넌트에 적용해보며 경험 기반으로 이해 심화
+- Safe Area, 스페이싱, 레이아웃 가이드 등의 개념을 코드 수준에서 추상적으로 실험
+- 접근성, 스케일링, 반응형 디자인 철학을 프로젝트에 반영하는 작은 실습 반복
+- Storybook이나 예제 페이지를 통해 적용 과정을 시각화하고 문서화
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+이 프로젝트는 단순한 UI 컴포넌트 연습을 넘어, **실제 제품에 적용 가능한 UI 설계 패턴**을 체득하는 데 목적이 있습니다.
+디자이너와 개발자가 함께 이해할 수 있는 언어로 UI를 구성해보며, 프론트엔드 디자인 시스템의 근본을 실험합니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+또한, 이 가이드라인의 다음 단계로서 AI 기반 기능은 물론, 다양한 입력(input) 인터페이스(예: 음성, 제스처, 자연어 명령)와 출력(output) 인터페이스(예: 시각화 대시보드, 음성 피드백, 증강현실 오버레이)에 대응하는 디자인 철학을 수립하고 실습할 예정입니다. 이에는 입력 방식에 따른 인터랙션 패턴 정의, 컨텍스트 인식 UI 컴포넌트 설계, 출력 매체별 정보 구조 및 시각화 원칙, 사용자 적응형 레이아웃 흐름, 오류 처리 및 피드백 메커니즘, 그리고 다양한 디바이스 환경에서 일관된 경험을 제공하기 위한 디자인 토큰 확장 전략 등이 포함됩니다. 이를 통해 차세대 인터페이스에 유연하게 대응하면서도 일관된 사용자 경험을 유지하는 디자인 시스템을 완성할 것입니다.

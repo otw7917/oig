@@ -1,20 +1,42 @@
+"use client";
+
+import { useState } from "react";
 import MaterialCode from "./MaterialCode";
 import MaterialControls from "./MaterialControls";
 import MaterialPreview from "./MaterialPreview";
+import type { BgOpacity } from "./utils/materialClass";
+
+type BgColor = "white" | "black" | "slate" | "blue";
+type BlurLevel = "none" | "sm" | "md" | "lg" | "2xl";
 
 export default function MaterialSection() {
+  const [bgColor, setBgColor] = useState<BgColor>("white");
+  const [blur, setBlur] = useState<BlurLevel>("lg");
+  const [bgOpacity, setBgOpactiy] = useState<BgOpacity>("20");
+
   return (
     <section className='flex flex-col items-center justify-center w-full min-h-[calc(100vh-4rem)] pt-16 px-4 md:px-6 lg:px-8'>
-      <div className='w-full max-w-5xl mx-auto'>
+      <div className='w-full max-w-7xl mx-auto'>
         <h1 className='text-2xl font-bold mb-6 pt-2 text-left'>Materials</h1>
 
         <div className='border-2 rounded-lg shadow-md backdrop-blur-sm bg-white/10 dark:bg-black/10 p-6'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <div className='min-h-[300px] flex items-center justify-center border rounded-lg p-4 bg-white/5 dark:bg-black/5'>
-              <MaterialPreview />
+            <div className='min-h-[300px] flex items-center justify-center border rounded-lg p-4 bg-gradient-to-br from-blue-500 to-purple-600'>
+              <MaterialPreview
+                bgColor={bgColor}
+                blur={blur}
+                bgOpacity={bgOpacity}
+              />
             </div>
             <div className='min-h-[300px] flex items-center justify-center border rounded-lg p-4 bg-white/5 dark:bg-black/5'>
-              <MaterialControls />
+              <MaterialControls
+                bgColor={bgColor}
+                onBgColorChange={setBgColor}
+                blur={blur}
+                onBlurChange={setBlur}
+                bgOpacity={bgOpacity}
+                onBgOpacityChange={setBgOpactiy}
+              />
             </div>
             <div className='md:col-span-2 min-h-[200px] flex items-center justify-center border rounded-lg p-4 bg-white/5 dark:bg-black/5 mt-0'>
               <MaterialCode />

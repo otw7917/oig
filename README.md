@@ -94,3 +94,12 @@ const headerStyles = cva(
 - 위에 코드 처럼 해놓으면 컴포넌트에서 스타일 설계도 처럼 볼 수 있다.
 - 개발자는 -> blur, bg, px 를 내가 제어할수 있구나!
 - 디자이너 -> 토큰을 여기다가 추가하기도 쉽고 가능함
+
+### Day3
+
+> [!TIP] 카카오톡 OG 초기화 팁
+> **SEO 를 위한 메타데이터**
+>
+> 카카오톡의 경우 자체적으로 캐시처리를 하는데 이걸 확인해보고 싶으면
+> https://developers.kakao.com/tool/debugger/sharing
+> 여기 들어가서 본인 url을 입력 -> 카카오 OG 캐시 초기화

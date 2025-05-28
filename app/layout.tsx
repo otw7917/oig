@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "OIG - 모던 UI playground",
   description:
     "다양한 인터페이스 가이드라인(Apple HIG, Material, Fluent 등)을 읽고, 직접 코드로 구현해보는 놀이터.",
+  metadataBase: new URL("https://oig.vercel.app"),
   openGraph: {
     title: "OIG",
     description:
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     images: [
       {
-        url: "/oig.svg",
+        url: "/oig.png",
         width: 1200,
         height: 630,
         alt: "OIG Logo",
@@ -42,18 +43,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <head>
-        <meta property='og:title' content='OIG' />
-        <meta
-          property='og:description'
-          content='다양한 인터페이스 가이드라인(Apple HIG, Material, Fluent 등)을 읽고, 직접 코드로 구현해보는 놀이터.'
-        />
-        <meta property='og:image' content='https://oig.vercel.app/oig.svg' />
-        <meta property='og:url' content='https://oig.vercel.app' />
-        <meta property='og:site_name' content='OIG' />
-        <meta property='og:type' content='website' />
-        <meta property='og:locale' content='ko_KR' />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

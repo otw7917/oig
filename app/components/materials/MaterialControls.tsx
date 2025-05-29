@@ -63,6 +63,28 @@ function MaterialControls({
       </div>
 
       <div className='mb-4'>
+        <h3 className='text-lg font-medium mb-2'>Background Color Opacity</h3>
+        <div className='flex gap-2'>
+          {opacityOptions.map((opacity) => (
+            <button
+              key={opacity.value}
+              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all
+                ${
+                  opacity.value === bgOpacity
+                    ? "bg-blue-500 text-white"
+                    : "bg-white/50 hover:bg-white/70 text-gray-700"
+                }`}
+              onClick={() =>
+                onBgOpacityChange(opacity.value as "20" | "40" | "60" | "80")
+              }
+            >
+              {opacity.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className='mb-4'>
         <h3 className='text-lg font-medium mb-2'>Blur Effect</h3>
         <div className='flex gap-2'>
           {blurOptions.map((option) => (
@@ -81,28 +103,6 @@ function MaterialControls({
               }
             >
               {option.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className='mb-4'>
-        <h3 className='text-lg font-medium mb-2'>Background Opacity</h3>
-        <div className='flex gap-2'>
-          {opacityOptions.map((opacity) => (
-            <button
-              key={opacity.value}
-              className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all
-                ${
-                  opacity.value === bgOpacity
-                    ? "bg-blue-500 text-white"
-                    : "bg-white/50 hover:bg-white/70 text-gray-700"
-                }`}
-              onClick={() =>
-                onBgOpacityChange(opacity.value as "20" | "40" | "60" | "80")
-              }
-            >
-              {opacity.label}
             </button>
           ))}
         </div>

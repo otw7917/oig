@@ -5,6 +5,7 @@ import MaterialCode from "./MaterialCode";
 import MaterialControls from "./MaterialControls";
 import MaterialPreview from "./MaterialPreview";
 import type { BgOpacity } from "./utils/materialClass";
+import BackgroundText from "./BackgroundText";
 
 type BgColor = "white" | "black" | "slate" | "blue";
 type BlurLevel = "none" | "sm" | "md" | "lg" | "2xl";
@@ -21,7 +22,8 @@ export default function MaterialSection() {
 
         <div className='border-2 rounded-lg shadow-md backdrop-blur-sm bg-white/10 dark:bg-black/10 p-6'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-            <div className='min-h-[300px] flex items-center justify-center border rounded-lg p-4 bg-gradient-to-br from-blue-500 to-purple-600'>
+            <div className='relative overflow-hidden min-h-[300px] flex items-center justify-center border rounded-lg p-4 bg-gradient-to-br from-blue-500 to-purple-600'>
+              <BackgroundText />
               <MaterialPreview
                 bgColor={bgColor}
                 blur={blur}

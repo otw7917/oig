@@ -3,8 +3,8 @@ interface MaterialControlsProps {
   onBgColorChange: (color: "white" | "black" | "slate" | "blue") => void;
   blur: "none" | "sm" | "md" | "lg" | "2xl";
   onBlurChange: (blur: "none" | "sm" | "md" | "lg" | "2xl") => void;
-  bgOpacity: "20" | "40" | "60" | "80";
-  onBgOpacityChange: (opacity: "20" | "40" | "60" | "80") => void;
+  bgOpacity: "0" | "20" | "40" | "60" | "80";
+  onBgOpacityChange: (opacity: "0" | "20" | "40" | "60" | "80") => void;
 }
 
 function MaterialControls({
@@ -34,6 +34,7 @@ function MaterialControls({
 
   // Opacity 옵션 배열
   const opacityOptions = [
+    { value: "0", label: "0%" },
     { value: "20", label: "20%" },
     { value: "40", label: "40%" },
     { value: "60", label: "60%" },
@@ -49,7 +50,7 @@ function MaterialControls({
             <button
               key={color.value}
               className={`h-10 w-10 rounded-full ${color.className} border-2 ${
-                bgColor === color.value && "ring-2 ring-yellow-400"
+                bgColor === color.value && "ring-2 ring-accent"
               }`}
               onClick={() =>
                 onBgColorChange(
@@ -71,11 +72,13 @@ function MaterialControls({
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all
                 ${
                   opacity.value === bgOpacity
-                    ? "bg-blue-500 text-white"
+                    ? "bg-accent text-accent-foreground"
                     : "bg-white/50 hover:bg-white/70 text-gray-700"
                 }`}
               onClick={() =>
-                onBgOpacityChange(opacity.value as "20" | "40" | "60" | "80")
+                onBgOpacityChange(
+                  opacity.value as "0" | "20" | "40" | "60" | "80"
+                )
               }
             >
               {opacity.label}
@@ -93,7 +96,7 @@ function MaterialControls({
               className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all
                 ${
                   blur === option.value
-                    ? "bg-blue-500 text-white"
+                    ? "bg-accent text-accent-foreground"
                     : "bg-white/50 hover:bg-white/70 text-gray-700"
                 }`}
               onClick={() =>

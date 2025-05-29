@@ -6,9 +6,13 @@
 
 ```
 app/components/materials
-├── MaterialPreview.tsx   // 시각적 결과를 보여주는 미리보기 컴포넌트
-├── MaterialControls.tsx  // blur, borderColor, backdropFilter 등을 제어하는 UI
-└── MaterialCode.tsx      // 현재 설정 상태를 기반으로 TailwindCSS 코드 스니펫 출력
+├── BackgroundText.tsx     // 배경 텍스트 컴포넌트 -> backdrop filter 효과 확인용
+├── MaterialPreview.tsx    // 시각적 결과 미리보기 컴포넌트
+├── MaterialControls.tsx   // blur, borderColor, backdropFilter 조작 UI
+├── MaterialSection.tsx    // 섹션 레이아웃 컴포넌트
+├── MaterialCode.tsx       // 현재 설정 기반 Tailwind CSS 코드 스니펫 출력
+└── utils
+    └── materialClass.ts   // 클래스 생성 유틸 함수
 ```
 
 ---
@@ -140,5 +144,4 @@ app/components/materials
 >   - 예를들어 핸드폰 컬러 선택, 자동차 외장 컬러 선택 이런 경우라면 상관없을듯.
 > - 그게 아니라면 다른 방법을 찾는게 좋을거 같다. 인라인 스타일로 처리 라던지..
 
-> [!TIP]
-> `backdrop-filter: blur` 속성의 경우 뒤에 글자가 있으면 확실히 확인할수 있다.
+> [!TIP] > `backdrop-filter: blur` 속성의 경우 뒤에 글자가 있으면 확실히 확인할수 있다.

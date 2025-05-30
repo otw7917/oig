@@ -1,7 +1,7 @@
 import { twMerge } from "tailwind-merge";
 
 type BgColor = "white" | "black" | "slate" | "blue";
-type BgOpacity = "20" | "40" | "60" | "80";
+type BgOpacity = "0" | "20" | "40" | "60" | "80";
 type BorderColor = "white" | "gray" | "blue";
 type BlurLevel = "none" | "sm" | "md" | "lg" | "2xl";
 
@@ -19,24 +19,28 @@ interface MaterialStyle {
 
 const bgMap = {
   white: {
+    0: "bg-white/0",
     20: "bg-white/20",
     40: "bg-white/40",
     60: "bg-white/60",
     80: "bg-white/80",
   },
   black: {
+    0: "bg-black/0",
     20: "bg-black/20",
     40: "bg-black/40",
     60: "bg-black/60",
     80: "bg-black/80",
   },
   slate: {
+    0: "bg-slate-500/0",
     20: "bg-slate-500/20",
     40: "bg-slate-500/40",
     60: "bg-slate-500/60",
     80: "bg-slate-500/80",
   },
   blue: {
+    0: "bg-blue-500/0",
     20: "bg-blue-500/20",
     40: "bg-blue-500/40",
     60: "bg-blue-500/60",

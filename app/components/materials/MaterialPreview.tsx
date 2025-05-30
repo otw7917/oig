@@ -15,7 +15,7 @@ function MaterialPreview({ bgColor, blur, bgOpacity }: MaterialPreviewProps) {
   const className = generateMaterialClass({
     bg: { color: bgColor, opacity: bgOpacity },
     blur: blur,
-    className: "w-1/2 h-1/2",
+    className: "min-w-[150px] min-h-[150px] w-1/2 h-1/2 aspect-square",
   });
 
   return <div className={className}></div>;

@@ -43,6 +43,7 @@ function MaterialControls({
 
   return (
     <div className='w-full p-4 bg-slate-200/30 dark:bg-black/30 backdrop-blur-sm rounded-lg'>
+      <h2 className='text-lg font-bold mb-4'>Controls</h2>
       <div className='mb-4'>
         <h3 className='text-lg font-medium mb-2'>Background Color</h3>
         <div className='flex gap-2'>

@@ -7,7 +7,6 @@ import MaterialPreview from "./MaterialPreview";
 import type { BgOpacity, BgColor, BlurLevel } from "./utils/materialClass";
 import BackgroundText from "./BackgroundText";
 
-// CSS 코드 생성을 위한 매핑 객체들
 const bgColorMap = {
   white: "255, 255, 255",
   black: "0, 0, 0",
@@ -28,9 +27,7 @@ export default function MaterialSection() {
   const [blur, setBlur] = useState<BlurLevel>("lg");
   const [bgOpacity, setBgOpactiy] = useState<BgOpacity>("20");
 
-  // 현재 설정에 따른 CSS 코드 생성
   const generatedCssCode = useMemo(() => {
-    // 불투명도를 0-1 사이 숫자로 변환
     const opacity = parseInt(bgOpacity) / 100;
 
     const cssCode =
@@ -39,10 +36,7 @@ export default function MaterialSection() {
       `backdrop-filter: blur(${blurMap[blur]});
 ` +
       `-webkit-backdrop-filter: blur(${blurMap[blur]});
-` +
-      `border-radius: 0.75rem;
-` +
-      `border: 1px solid rgba(255, 255, 255, 0.18);`;
+`;
 
     return cssCode;
   }, [bgColor, blur, bgOpacity]);

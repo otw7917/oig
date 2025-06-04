@@ -1,13 +1,17 @@
 "use client";
 
+import Spinner from "./Spinner";
+
 type ImageViewerProps = {
   src: string | null;
   alt?: string;
+  isLoading?: boolean;
 };
 
 export default function ImageViewer({
   src,
   alt = "Generated image",
+  isLoading = false,
 }: ImageViewerProps) {
   return (
     <div
@@ -24,7 +28,14 @@ export default function ImageViewer({
           background: "linear-gradient(120deg, #9ae6ff, #fff5, #e0d7ff 80%)",
         }}
       />
-      {src ? (
+      {isLoading ? (
+        <div className='absolute inset-0 flex items-center justify-center z-10 bg-white/30 backdrop-blur-sm rounded-3xl'>
+          <Spinner size={48} className='text-blue-500' />
+          <span className='ml-4 text-blue-700 text-lg font-medium'>
+            이미지 생성 중...
+          </span>
+        </div>
+      ) : src ? (
         <img
           src={src}
           alt={alt}

@@ -1,12 +1,15 @@
 "use client";
+
 import { useState } from "react";
 import ChatComposer from "../components/chat/ChatComposer";
 import ImageViewer from "./ImageViewer";
 
 function GenImageHome() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // 추가
 
   const handleSendMessage = async (message: string) => {
+    setIsLoading(true);
     try {
       const res = await fetch("/api/generate-image", {
         method: "POST",
@@ -17,18 +20,19 @@ function GenImageHome() {
       if (!res.ok) {
         throw new Error(data.error || "이미지 생성 실패");
       }
-      // (3) base64 이미지 문자열
       setImageSrc(`data:image/png;base64,${data.imageBase64}`);
     } catch (e: any) {
       alert(e.message);
       setImageSrc(null);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
-      <ChatComposer onSend={handleSendMessage} />
-      <ImageViewer src={imageSrc} />
+      <ChatComposer onSend={handleSendMessage} isLoading={isLoading} />
+      <ImageViewer src={imageSrc} isLoading={isLoading} />
     </div>
   );
 }

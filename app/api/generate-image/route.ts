@@ -59,11 +59,11 @@ export async function POST(request: NextRequest) {
         },
       }
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("[generate-image Error]", err);
-    return NextResponse.json(
-      { error: err.message || "서버 에러" },
-      { status: 500 }
-    );
+    if (err instanceof Error) {
+      return NextResponse.json({ error: err.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: "서버 에러" }, { status: 500 });
   }
 }

@@ -21,8 +21,12 @@ function GenImageHome() {
         throw new Error(data.error || "이미지 생성 실패");
       }
       setImageSrc(`data:image/png;base64,${data.imageBase64}`);
-    } catch (e: any) {
-      alert(e.message);
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        alert(e.message);
+      } else {
+        alert("알 수 없는 오류가 발생했습니다.");
+      }
       setImageSrc(null);
     } finally {
       setIsLoading(false);

@@ -15,7 +15,7 @@ export default function ImageViewer({
 }: ImageViewerProps) {
   return (
     <div
-      className='w-full  flex flex-col items-center mt-10 rounded-3xl bg-white/30 backdrop-blur-xl border border-white/20 shadow-2xl min-h-[360px] transition-all p-10 max-w-xl mx-auto relative overflow-hidden'
+      className='w-full  flex flex-col items-center mb-10 rounded-3xl glass-card-2xl shadow-2xl min-h-[360px] transition-all p-10 max-w-xl mx-auto relative overflow-hidden'
       style={{
         boxShadow:
           "0 8px 40px 0 rgba(60, 60, 90, 0.10), 0 1.5px 7px 0 rgba(130,150,200,0.07)",
@@ -39,9 +39,8 @@ export default function ImageViewer({
         <img
           src={src}
           alt={alt}
-          className='max-w-full rounded-2xl shadow-xl border border-white/40'
+          className='max-w-full rounded-2xl shadow-xl border border-white/40 object-contain'
           style={{
-            objectFit: "contain",
             maxHeight: "330px",
             background: "rgba(255,255,255,0.15)",
             transition: "box-shadow .3s, filter .2s",

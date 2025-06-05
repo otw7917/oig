@@ -31,8 +31,8 @@ function GenImageHome() {
 
   return (
     <div className='flex flex-col items-center justify-center h-screen bg-gray-100'>
-      <ChatComposer onSend={handleSendMessage} isLoading={isLoading} />
       <ImageViewer src={imageSrc} isLoading={isLoading} />
+      <ChatComposer onSend={handleSendMessage} isLoading={isLoading} />
     </div>
   );
 }

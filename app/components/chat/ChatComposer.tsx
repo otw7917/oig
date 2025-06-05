@@ -27,7 +27,7 @@ export default function ChatComposer({
     <form
       onSubmit={handleSubmit}
       className={`
-        w-full max-w-xl flex items-center space-x-2 p-2 bg-white rounded shadow
+        w-full max-w-xl flex items-center space-x-2 p-2 bg-white rounded-3xl shadow
         transition
         ${isLoading ? "opacity-80 pointer-events-none" : ""}
       `}
@@ -37,14 +37,14 @@ export default function ChatComposer({
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder='프롬프트를 작성해주세요...'
-        className='flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+        className='flex-1 border border-gray-300 rounded-3xl px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
         disabled={disabled || isLoading}
       />
       <button
         type='submit'
         disabled={disabled || isLoading || input.trim().length === 0}
         className={`
-          px-4 py-2 rounded flex items-center justify-center
+          px-4 py-2 rounded-3xl flex items-center justify-center
           ${
             disabled || isLoading || input.trim().length === 0
               ? "bg-gray-300 text-gray-600 cursor-not-allowed"

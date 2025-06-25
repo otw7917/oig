@@ -73,7 +73,9 @@ async function Header({ className, variants = {}, ...props }: HeaderProps) {
                   className='rounded-full'
                 />
               )}
-              <span className='text-sm font-medium'>{user.email}</span>
+              <span className='text-sm font-medium'>
+                {user.email?.split("@")[0]}
+              </span>
             </Link>
             <form action={signOut}>
               <button className='px-3 py-1 rounded-md border border-neutral-300 bg-white/80 text-neutral-900 text-sm font-medium hover:bg-white'>

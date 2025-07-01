@@ -35,7 +35,7 @@ export function UserProfile({ user, className = "" }: UserProfileProps) {
               className='rounded-full'
             />
           )}
-          <span className='text-sm font-medium'>
+          <span className='text-sm font-medium hidden sm:inline'>
             {user.user_metadata?.nickname || user.email?.split("@")[0]}
           </span>
         </button>

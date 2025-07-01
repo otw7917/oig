@@ -40,7 +40,10 @@ export function UserProfile({ user, className = "" }: UserProfileProps) {
           </span>
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'>
+      <DropdownMenuContent
+        align='end'
+        className='w-[var(--radix-dropdown-menu-trigger-width)]'
+      >
         <DropdownMenuItem asChild>
           <Link href='/account' className='w-full text-left'>
             내 정보

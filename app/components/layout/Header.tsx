@@ -1,7 +1,10 @@
-import Image from "next/image";
-import { Sun } from "lucide-react";
 import { cva } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
+import { createClient } from "@/utils/supabase/server";
+import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
+import { UserProfile } from "./UserProfile";
+import { LoginButton } from "./LoginButton";
 
 const headerStyles = cva(
   "fixed w-full h-16 flex items-center justify-between border-b z-50",
@@ -40,15 +43,20 @@ type HeaderProps = {
   variants?: HeaderVaraints;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-function Header({ className, variants = {}, ...props }: HeaderProps) {
+async function Header({ className, variants = {}, ...props }: HeaderProps) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   const classes = twMerge(headerStyles(variants), className);
+
   return (
     <header className={classes} {...props}>
-      <div>
-        <Image src='/oig.svg' alt='OIG Logo' width={120} height={40} />
-      </div>
-      <div>
-        <Sun />
+      <Logo />
+      <div className='flex items-center gap-3'>
+        <ThemeToggle />
+        {user ? <UserProfile user={user} /> : <LoginButton />}
       </div>
     </header>
   );

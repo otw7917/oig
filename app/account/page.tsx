@@ -1,5 +1,21 @@
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 export default async function AccountPage() {
   const supabase = await createClient();
@@ -14,42 +30,72 @@ export default async function AccountPage() {
 
   const {
     email,
-    id,
-    user_metadata: { avatar_url, full_name },
-    app_metadata: { provider },
+    user_metadata: { avatar_url, full_name } = {},
+    app_metadata: { provider } = {},
   } = user;
 
   const displayData = {
-    "User ID": id,
     Email: email,
     "Full Name": full_name,
-    "Avatar URL": avatar_url,
     Provider: provider,
   };
 
+  const userInitial = (full_name || email || "U").charAt(0).toUpperCase();
+
   return (
-    <main className="pt-24 px-4">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-2xl font-bold">Account Information</h1>
-        <p className="mt-4 text-neutral-600 dark:text-neutral-400">
-          Welcome back, {full_name || email}!
-        </p>
-        <div className="mt-6 p-4 bg-neutral-100 dark:bg-neutral-800 rounded-md">
-          <h2 className="text-lg font-semibold">Your Details</h2>
-          <div className="mt-4 space-y-2">
-            {Object.entries(displayData).map(([key, value]) => (
-              <div key={key} className="flex">
-                <span className="w-32 font-medium text-neutral-700 dark:text-neutral-300">
-                  {key}:
-                </span>
-                <span className="text-neutral-900 dark:text-neutral-100 break-all">
-                  {String(value || "Not provided")}
-                </span>
-              </div>
-            ))}
+    <main className='container mx-auto py-8 px-4 max-w-4xl'>
+      <Card>
+        <CardHeader className='border-b'>
+          <div className='flex flex-col items-center text-center gap-4 w-full py-4'>
+            <Avatar className='h-14 w-14'>
+              <AvatarImage
+                src={avatar_url || ""}
+                alt={`${full_name || "User"}'s avatar`}
+              />
+              <AvatarFallback className='text-xl sm:text-2xl'>
+                {userInitial}
+              </AvatarFallback>
+            </Avatar>
+            <div className='space-y-1'>
+              <CardTitle className='text-2xl'>{full_name || "User"}</CardTitle>
+              <CardDescription className='text-base'>{email}</CardDescription>
+            </div>
           </div>
-        </div>
-      </div>
+        </CardHeader>
+        <CardContent className='p-0'>
+          <Table className='border-separate border-spacing-0'>
+            <TableHeader className='bg-muted/50'>
+              <TableRow className='hover:bg-muted/60'>
+                <TableHead className='w-[200px] text-left bg-muted/20'>
+                  Field
+                </TableHead>
+                <TableHead className='text-left pl-4'>Value</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {Object.entries(displayData).map(([key, value], index) => (
+                <TableRow
+                  key={key}
+                  className={`${
+                    index % 2 === 0 ? "bg-background" : "bg-muted/20"
+                  } hover:bg-muted/40 transition-colors`}
+                >
+                  <TableCell className='py-3 bg-muted/10 text-muted-foreground'>
+                    <span>{key}</span>
+                  </TableCell>
+                  <TableCell className='py-3 pl-4 font-semibold text-foreground'>
+                    {value || (
+                      <span className='text-muted-foreground italic'>
+                        Not provided
+                      </span>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </main>
   );
 }

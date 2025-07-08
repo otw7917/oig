@@ -76,6 +76,19 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Glass card variables - light mode with RGB fallback and OKLCH override */
+  --glass-card-bg-color-2xs: rgba(255, 255, 255, 0.1);
+  --glass-card-bg-color-md: rgba(255, 255, 255, 0.2);
+  --glass-card-bg-color-2xl: rgba(255, 255, 255, 0.3);
+}
+
+@supports (color: oklch(1 0 0 / 10%)) {
+  :root {
+    --glass-card-bg-color-2xs: oklch(1 0 0 / 10%);
+    --glass-card-bg-color-md: oklch(1 0 0 / 20%);
+    --glass-card-bg-color-2xl: oklch(1 0 0 / 30%);
+  }
 }
 
 .dark {
@@ -110,6 +123,19 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+
+  /* Glass card variables - dark mode with RGB fallback and OKLCH override */
+  --glass-card-bg-color-2xs: rgba(30, 32, 37, 0.4);
+  --glass-card-bg-color-md: rgba(30, 32, 37, 0.5);
+  --glass-card-bg-color-2xl: rgba(30, 32, 37, 0.6);
+}
+
+@supports (color: oklch(0.145 0 0 / 40%)) {
+  .dark {
+    --glass-card-bg-color-2xs: oklch(0.145 0 0 / 40%);
+    --glass-card-bg-color-md: oklch(0.145 0 0 / 50%);
+    --glass-card-bg-color-2xl: oklch(0.145 0 0 / 60%);
+  }
 }
 
 @layer base {
@@ -118,5 +144,22 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .glass-card-2xs {
+    @apply relative backdrop-blur-xs border-2 border-white/20 shadow-xs;
+    background-color: var(--glass-card-bg-color-2xs);
+  }
+
+  .glass-card-md {
+    @apply relative backdrop-blur-md border-2 border-white/20 shadow-md;
+    background-color: var(--glass-card-bg-color-md);
+  }
+
+  .glass-card-2xl {
+    @apply relative backdrop-blur-2xl border-2 border-white/20 shadow-2xl;
+    background-color: var(--glass-card-bg-color-2xl);
   }
 }

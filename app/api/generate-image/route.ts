@@ -112,7 +112,6 @@ export async function POST(request: NextRequest) {
     // Refactored pipeline
     const imageData = await generateImage(prompt);
     const filePath = await uploadImage(supabase, user.id, imageData);
-    await new Promise((res) => setTimeout(res, 1000));
     const imageUrl = await createSignedUrl(supabase, filePath);
 
     return NextResponse.json({ success: true, imageUrl });

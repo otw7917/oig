@@ -6,7 +6,7 @@ import ImageViewer from "./ImageViewer";
 
 function GenImageHome() {
   const [imageSrc, setImageSrc] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false); // 추가
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSendMessage = async (message: string) => {
     setIsLoading(true);
@@ -20,7 +20,7 @@ function GenImageHome() {
       if (!res.ok) {
         throw new Error(data.error || "이미지 생성 실패");
       }
-      setImageSrc(`data:image/png;base64,${data.imageBase64}`);
+      setImageSrc(data.imageUrl);
     } catch (e: unknown) {
       if (e instanceof Error) {
         alert(e.message);

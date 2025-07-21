@@ -15,7 +15,7 @@ export default function ImageViewer({
 }: ImageViewerProps) {
   return (
     <div
-      className='w-full  flex flex-col items-center mb-10 rounded-3xl glass-card-2xl shadow-2xl min-h-[360px] transition-all p-10 max-w-xl mx-auto relative overflow-hidden'
+      className='w-full h-[600px] flex flex-col items-center justify-center rounded-3xl glass-card-2xl shadow-2xl transition-all p-6 relative overflow-hidden'
       style={{
         boxShadow:
           "0 8px 40px 0 rgba(60, 60, 90, 0.10), 0 1.5px 7px 0 rgba(130,150,200,0.07)",
@@ -31,22 +31,26 @@ export default function ImageViewer({
       {isLoading ? (
         <div className='absolute inset-0 flex items-center justify-center z-10 bg-white/30 backdrop-blur-sm rounded-3xl'>
           <Spinner size={48} className='text-blue-500' />
-          <span className='ml-4 text-blue-700 text-lg font-medium'>
+          <span className='ml-4 text-indigo-700 text-lg font-medium'>
             이미지 생성 중...
           </span>
         </div>
       ) : src ? (
-        <img
-          src={src}
-          alt={alt}
-          className='max-w-full rounded-2xl shadow-xl border border-white/40 object-contain'
-          style={{
-            maxHeight: "330px",
-            background: "rgba(255,255,255,0.15)",
-            transition: "box-shadow .3s, filter .2s",
-            filter: "drop-shadow(0 2px 8px #afdfff66)",
-          }}
-        />
+        <div className='w-full h-full flex items-center justify-center p-4'>
+          <div className='relative w-full h-full flex items-center justify-center'>
+            <img
+              src={src}
+              alt={alt}
+              className='max-w-full max-h-full rounded-xl object-contain'
+              style={{
+                maxHeight: "calc(100% - 2rem)",
+                background: "rgba(255,255,255,0.15)",
+                transition: "all 0.2s ease",
+                filter: "drop-shadow(0 2px 12px rgba(0,0,0,0.1))",
+              }}
+            />
+          </div>
+        </div>
       ) : (
         <div className='flex-1 flex items-center justify-center w-full h-full min-h-[300px] text-gray-400 text-xl select-none tracking-wider'>
           이미지가 생성되면 이곳에 표시됩니다

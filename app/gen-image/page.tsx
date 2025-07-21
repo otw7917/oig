@@ -25,21 +25,10 @@ function GenImageHome() {
         throw new Error(data.error || "이미지 생성 실패");
       }
 
-      // 새 이미지를 이미지 목록에 추가
-      const newImage: ImageItem = {
-        id: Date.now().toString(),
-        src: data.imageUrl,
-        alt: message,
-        createdAt: new Date().toISOString(),
-        metadata: {
-          prompt: message,
-        },
-      };
-
-      setImages((prev) => [newImage, ...prev]);
+      // 먼저 ImageViewer에 표시
       setImageSrc(data.imageUrl);
       
-      // 새 이미지 생성 후 목록 새로고침
+      // 그 다음에 목록 새로고침
       await loadExistingImages();
     } catch (e: unknown) {
       if (e instanceof Error) {
@@ -53,9 +42,6 @@ function GenImageHome() {
     }
   };
 
-  const handleImageClick = (image: ImageItem) => {
-    setImageSrc(image.src);
-  };
 
   const loadExistingImages = async () => {
     try {
@@ -103,7 +89,6 @@ function GenImageHome() {
         <h2 className='text-lg font-semibold mb-4'>생성된 이미지</h2>
         <ImageGallery
           images={images}
-          onImageClick={handleImageClick}
           isLoading={isLoadingImages}
           aspectRatio={1}
           gap={4}

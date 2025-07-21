@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef, useEffect } from "react";
 import Spinner from "@/app/gen-image/Spinner";
 
 type ChatComposerProps = {
@@ -15,12 +15,29 @@ export default function ChatComposer({
   isLoading = false,
 }: ChatComposerProps) {
   const [input, setInput] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // 자동 높이 조정
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [input]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const trimmed = input.trim();
     if (!trimmed) return;
     onSend(trimmed);
+    setInput(""); // 전송 후 입력창 비우기
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
   };
 
   return (
@@ -32,13 +49,15 @@ export default function ChatComposer({
         ${isLoading ? "opacity-80 pointer-events-none" : ""}
       `}
     >
-      <input
-        type='text'
+      <textarea
+        ref={textareaRef}
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        placeholder='프롬프트를 작성해주세요...'
-        className='flex-1 border border-gray-300 rounded-3xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+        onKeyDown={handleKeyDown}
+        placeholder='프롬프트를 작성해주세요... (Enter: 전송, Shift+Enter: 줄바꿈)'
+        className='flex-1 border border-gray-300 rounded-3xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[3.5rem] max-h-48'
         disabled={disabled || isLoading}
+        rows={1}
       />
       <button
         type='submit'

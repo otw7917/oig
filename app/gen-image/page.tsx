@@ -72,7 +72,7 @@ function GenImageHome() {
   }, []);
 
   return (
-    <div className='flex h-screen bg-gray-100'>
+    <div className='flex h-[calc(100vh-4rem)] bg-gray-100'>
       <div className='flex-1 flex flex-col p-4'>
         <div className='flex-1 flex items-center justify-center mb-8'>
           <div className='w-full max-w-2xl'>

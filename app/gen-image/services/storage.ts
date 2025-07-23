@@ -47,15 +47,35 @@ export async function createSignedUrl(
   supabase: SupabaseClient,
   filePath: string
 ): Promise<string> {
-  const { data, error } = await supabase.storage
-    .from(BUCKET_NAME)
-    .createSignedUrl(filePath, 3600); // 1 hour expiry
+  try {
+    const { data, error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .createSignedUrl(filePath, 3600); // 1 hour expiry
 
-  if (error || !data) {
-    console.error("Signed URL creation error:", error);
-    throw new Error("Failed to create a signed URL for the image.");
+    if (error) {
+      console.error("Signed URL creation error:", error);
+      
+      // Provide clear error messages based on error type
+      if (error.message?.includes('not found') || error.message?.includes('does not exist')) {
+        throw new Error(`Storage bucket '${BUCKET_NAME}' not found. Please contact administrator.`);
+      }
+      
+      if (error.message?.includes('permission') || error.message?.includes('unauthorized')) {
+        throw new Error(`Permission denied for file: ${filePath}`);
+      }
+      
+      throw new Error(`Failed to create signed URL: ${error.message}`);
+    }
+
+    if (!data?.signedUrl) {
+      throw new Error("No signed URL returned from Supabase");
+    }
+
+    return data.signedUrl;
+  } catch (err) {
+    console.error("Unexpected error in createSignedUrl:", err);
+    throw err;
   }
-  return data.signedUrl;
 }
 
 /**

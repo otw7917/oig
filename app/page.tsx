@@ -1,10 +1,8 @@
-import Header from "./components/layout/Header";
 import MaterialSection from "./components/materials/MaterialSection";
 
 export default function Home() {
   return (
     <>
-      <Header />
       <MaterialSection />
       <section className='flex flex-col items-center justify-center h-screen bg-gray-100'>
         <h1 className='text-4xl font-bold mb-4'>

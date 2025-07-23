@@ -13,25 +13,39 @@ export async function GET() {
 
     const files = await listImages(supabase, user.id);
 
-    if (!files) {
+    if (!files || files.length === 0) {
         return NextResponse.json({ success: true, images: [] });
     }
 
-    const signedUrls = await Promise.all(
+    const signedUrls = await Promise.allSettled(
         files.map(file => createSignedUrl(supabase, `private/${user.id}/${file.name}`))
     );
 
-    const metadataPromises = files.map(file => 
-        getImageMetadata(supabase, `private/${user.id}/${file.name}`)
+    const metadataResults = await Promise.allSettled(
+        files.map(file => getImageMetadata(supabase, `private/${user.id}/${file.name}`))
     );
-    const metadata = await Promise.all(metadataPromises);
 
-    const images = files.map((file, index) => ({
-        name: file.name,
-        url: signedUrls[index],
-        prompt: metadata[index].prompt,
-        createdAt: metadata[index].createdAt,
-    }));
+    const images = files.map((file, index) => {
+        const urlResult = signedUrls[index];
+        const metadataResult = metadataResults[index];
+        
+        // Skip files that failed to get signed URL
+        if (urlResult.status === 'rejected') {
+            console.error(`Failed to get signed URL for ${file.name}:`, urlResult.reason);
+            return null;
+        }
+        
+        const metadata = metadataResult.status === 'fulfilled' 
+            ? metadataResult.value 
+            : { prompt: "", createdAt: "" };
+        
+        return {
+            name: file.name,
+            url: urlResult.value,
+            prompt: metadata.prompt,
+            createdAt: metadata.createdAt,
+        };
+    }).filter(Boolean); // Remove null entries
 
     return NextResponse.json({ success: true, images });
   } catch (error) {

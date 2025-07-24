@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Sun, Moon, Monitor } from "lucide-react";
-import { useThemeContext } from "@/lib/contexts/ThemeContext";
+import { useThemeContext, Theme } from "@/lib/contexts/ThemeContext";
 
 interface ThemeToggleProps {
   className?: string;
@@ -9,56 +10,73 @@ interface ThemeToggleProps {
 
 export function ThemeToggle({ className = "" }: ThemeToggleProps) {
   const { theme, setTheme } = useThemeContext();
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
 
-  const handleThemeToggle = () => {
-    const themeOrder = ['light', 'dark', 'system'] as const;
-    const currentIndex = themeOrder.indexOf(theme);
-    const nextIndex = (currentIndex + 1) % themeOrder.length;
-    setTheme(themeOrder[nextIndex]);
+  const themeOptions: Array<{ value: Theme; icon: React.ReactNode; label: string }> = [
+    { value: 'light', icon: <Sun className="w-4 h-4" />, label: 'Light' },
+    { value: 'dark', icon: <Moon className="w-4 h-4" />, label: 'Dark' },
+    { value: 'system', icon: <Monitor className="w-4 h-4" />, label: 'System' },
+  ];
+
+  const getCurrentIcon = () => {
+    const currentOption = themeOptions.find(option => option.value === theme);
+    return currentOption?.icon || <Sun className="w-5 h-5" />;
   };
 
-  const getIcon = () => {
-    switch (theme) {
-      case 'light':
-        return <Sun className="w-5 h-5" />;
-      case 'dark':
-        return <Moon className="w-5 h-5" />;
-      case 'system':
-        return <Monitor className="w-5 h-5" />;
-      default:
-        return <Sun className="w-5 h-5" />;
-    }
-  };
-
-  const getAriaLabel = () => {
-    switch (theme) {
-      case 'light':
-        return 'Switch to dark mode';
-      case 'dark':
-        return 'Switch to system mode';
-      case 'system':
-        return 'Switch to light mode';
-      default:
-        return 'Toggle theme';
-    }
+  const handleThemeSelect = (selectedTheme: Theme) => {
+    setTheme(selectedTheme);
+    setIsTooltipOpen(false);
   };
 
   return (
-    <button
-      onClick={handleThemeToggle}
-      className={`
-        p-2 rounded-md transition-all duration-200
-        hover:bg-neutral-100 dark:hover:bg-neutral-800
-        hover:scale-110 active:scale-95
-        focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
-        ${className}
-      `}
-      aria-label={getAriaLabel()}
-      title={getAriaLabel()}
-    >
-      <div className="transition-transform duration-200 hover:rotate-12">
-        {getIcon()}
-      </div>
-    </button>
+    <div className="relative">
+      <button
+        onClick={() => setIsTooltipOpen(!isTooltipOpen)}
+        onBlur={() => setTimeout(() => setIsTooltipOpen(false), 150)}
+        className={`
+          p-2 rounded-md transition-all duration-200
+          hover:bg-neutral-100 dark:hover:bg-neutral-800
+          hover:scale-110 active:scale-95
+          focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
+          ${className}
+        `}
+        aria-label="Theme selector"
+        title="Change theme"
+      >
+        <div className="transition-transform duration-200 hover:rotate-12">
+          {getCurrentIcon()}
+        </div>
+      </button>
+
+      {isTooltipOpen && (
+        <div className="absolute right-0 top-full mt-2 z-50">
+          <div className="bg-white/90 dark:bg-neutral-800/90 border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-lg backdrop-blur-sm overflow-hidden">
+            <div className="p-1">
+              {themeOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => handleThemeSelect(option.value)}
+                  className={`
+                    w-full flex items-center gap-3 px-3 py-2 text-sm rounded-md
+                    transition-all duration-150 text-left
+                    hover:bg-neutral-100 dark:hover:bg-neutral-700
+                    ${theme === option.value 
+                      ? 'bg-accent/10 text-accent border-l-2 border-accent' 
+                      : 'text-neutral-700 dark:text-neutral-300'
+                    }
+                  `}
+                >
+                  <span className="flex-shrink-0">{option.icon}</span>
+                  <span className="min-w-[60px]">{option.label}</span>
+                  {theme === option.value && (
+                    <div className="w-2 h-2 bg-accent rounded-full ml-auto"></div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

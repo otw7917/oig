@@ -2,9 +2,7 @@ import { cva } from "class-variance-authority";
 import { twMerge } from "tailwind-merge";
 import { createClient } from "@/utils/supabase/server";
 import { Logo } from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
-import { UserProfile } from "./UserProfile";
-import { LoginButton } from "./LoginButton";
+import { HeaderActions } from "./HeaderActions";
 
 const headerStyles = cva(
   "fixed w-full h-16 flex items-center justify-between border-b z-50",
@@ -54,10 +52,7 @@ async function Header({ className, variants = {}, ...props }: HeaderProps) {
   return (
     <header className={classes} {...props}>
       <Logo />
-      <div className='flex items-center gap-3'>
-        <ThemeToggle />
-        {user ? <UserProfile user={user} /> : <LoginButton />}
-      </div>
+      <HeaderActions user={user} />
     </header>
   );
 }

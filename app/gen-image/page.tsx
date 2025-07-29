@@ -72,7 +72,7 @@ function GenImageHome() {
   }, []);
 
   return (
-    <div className='flex h-[calc(100vh-4rem)] bg-gray-100'>
+    <div className='flex h-[calc(100vh-4rem)] bg-background'>
       <div className='flex-1 flex flex-col p-4'>
         <div className='flex-1 flex items-center justify-center mb-8'>
           <div className='w-full max-w-2xl'>
@@ -85,8 +85,8 @@ function GenImageHome() {
           </div>
         </div>
       </div>
-      <div className='w-96 p-4 border-l border-gray-200 overflow-y-auto'>
-        <h2 className='text-lg font-semibold mb-4'>생성된 이미지</h2>
+      <div className='w-96 p-4 border-l border-border overflow-y-auto'>
+        <h2 className='text-lg font-semibold mb-4 text-foreground'>생성된 이미지</h2>
         <ImageGallery
           images={images}
           isLoading={isLoadingImages}

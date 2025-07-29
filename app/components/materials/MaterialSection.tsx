@@ -42,9 +42,9 @@ export default function MaterialSection() {
   }, [bgColor, blur, bgOpacity]);
 
   return (
-    <section className='flex flex-col items-center justify-center w-full min-h-[calc(100vh-4rem)] pt-16 px-4 md:px-6 lg:px-8'>
+    <section className='flex flex-col items-center justify-center w-full min-h-[calc(100vh-4rem)] pt-16 px-4 md:px-6 lg:px-8 bg-gradient-to-br from-slate-600 via-slate-700 to-gray-800'>
       <div className='w-full max-w-7xl mx-auto'>
-        <h1 className='text-2xl font-bold mb-4 pt-2 text-left'>Materials</h1>
+        <h1 className='text-2xl font-bold mb-4 pt-2 text-left text-white'>Materials</h1>
 
         <div className='border-2 rounded-lg shadow-md backdrop-blur-sm bg-white/10 dark:bg-black/10 p-6'>
           <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>

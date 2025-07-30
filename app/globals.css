@@ -142,8 +142,22 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+  html,
+  body {
+    @apply m-0 p-0 w-full overflow-x-hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+  }
+
+  html {
+    transition: background-color 0.3s ease;
   }
 }
 

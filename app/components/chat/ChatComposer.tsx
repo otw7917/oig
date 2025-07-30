@@ -44,7 +44,7 @@ export default function ChatComposer({
     <form
       onSubmit={handleSubmit}
       className={`
-        w-full max-w-4xl flex items-center space-x-3 p-3 bg-white rounded-3xl shadow-lg
+        w-full max-w-4xl flex items-center space-x-3 p-3 bg-background border border-border rounded-3xl shadow-lg
         transition-all duration-200
         ${isLoading ? "opacity-80 pointer-events-none" : ""}
       `}
@@ -55,7 +55,7 @@ export default function ChatComposer({
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder='프롬프트를 작성해주세요... (Enter: 전송, Shift+Enter: 줄바꿈)'
-        className='flex-1 border border-gray-300 rounded-3xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[3.5rem] max-h-48'
+        className='flex-1 border border-border bg-background text-foreground rounded-3xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none overflow-hidden min-h-[3.5rem] max-h-48'
         disabled={disabled || isLoading}
         rows={1}
       />
